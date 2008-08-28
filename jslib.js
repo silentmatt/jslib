@@ -585,5 +585,5 @@ JSLIB.loaded["jslib"] = true;
 JSLIB.core = [ "thread", "filesystem", "string", "console", "math", "array", "functional", "json", "xmlhttprequest" ];
 JSLIB.extras = [ "complex", "dialog", "encoding", "encryption", "inflector", "roman" ];
 
-JSLIB.require(core);
+JSLIB.require(JSLIB.core);
 
