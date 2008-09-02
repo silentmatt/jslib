@@ -211,6 +211,20 @@ function Exception(msg, trace) {
 	};
 }
 
+function NamedError(name) {
+    this.message = name;
+    this.name = name;
+}
+NamedError.prototype = new Error();
+NamedError.prototype.toString = function () {
+    if (this.message && this.message != this.name) {
+        return this.name + "(" + this.message + ")";
+    } else {
+        return this.name + "()";
+    }
+};
+
+
 
 // Get arguments as an array, optionally specifying the first argument to consider
 // args[start] is an array, and is the last argument, it is returned as is.
@@ -386,8 +400,12 @@ Function.prototype.bind = function(obj, args) {
 
 Function.bind = function(func, obj) {
 	var args = array(arguments).slice(2);
+	if (isString(func)) {
+		func = obj[func];
+	}
 
 	return function() {
+		if (obj === undefined) obj = this;
 		return func.apply(obj, args.concat(array(arguments)));
 	};
 };
@@ -424,8 +442,12 @@ var getGlobal = function() {
 }();
 
 // Convert an array-like object to an actual array
-function array(a) {
-	return Array.slice(a, 0);
+function array(a, skip) {
+	if (typeof a.__iterator__ === "function") {
+		let theArray = [i for each (i in a)];
+		return skip ? theArray.slice(skip) : theArray;
+	}
+	return Array.slice(a, skip || 0);
 }
 
 function javaArray(length, type) {
@@ -504,11 +526,83 @@ function isEmpty(o) {
 			}
 		}
 	}
+
 	return true;
 }
 
+Object.isNullOrEmpty = function(o) {
+	return !o || isEmpty(o);
+};
+
+function isNullOrUndefined(o) {
+	return o === null || o === undefined;
+}
+
 // Helper method for extending one object with another
-function extend(a, b) {
+function extend(self, obj /*, ... */) {
+    if (isNullOrUndefined(self)) self = {};
+
+    for (var i = 1; i < arguments.length; i++) {
+        var o = arguments[i];
+        if (!isNullOrUndefined(o)) {
+            for (var k in o) {
+                self[k] = o[k];
+            }
+        }
+    }
+
+    return self;
+}
+
+function extendtree(self, obj /*, ...*/) {
+	if (isNullOrUndefined(self)) self = {};
+
+	for (var i = 1; i < arguments.length; i++) {
+		var o = arguments[i];
+		if (!isNullOrUndefined(o)) {
+			for (var k in o) {
+				var v = o[k];
+				if (typeOf(self[k]) == 'object' && typeOf(v) == 'object') {
+					arguments.callee(self[k], v);
+				} else {
+					self[k] = v;
+				}
+			}
+		}
+	}
+
+	return self;
+}
+
+function setdefault(self, obj /*, ...*/) {
+	if (isNullOrUndefined(self)) self = {};
+
+	for (var i = 1; i < arguments.length; i++) {
+		var o = arguments[i];
+		if (!isNullOrUndefined(o)) {
+			for (var k in o) {
+				if (!(k in self)) {
+					self[k] = o[k];
+				}
+			}
+		}
+	}
+
+	return self;
+}
+
+// Forward a method to another method in the same object
+// Constructor.prototype.somefunction = ... ;
+// Constructor.prototype.equivalentFunction = Function.forwardCall("somefunction")
+Function.forwardCall = function(func) {
+	return function() {
+		return this[func].apply(this, arguments);
+	};
+};
+
+/*function extend(a, b) {
+	if (isNullOrUndefined(a)) a = {};
+
 	for (var i in b) {
 		var g = b.__lookupGetter__(i), s = b.__lookupSetter__(i);
 		if (g || s) {
@@ -524,11 +618,23 @@ function extend(a, b) {
 		}
 	}
 	return a;
-}
+}*/
 
 // Get all the enumerable properties of an object as an array
 function getProperties(o) {
 	return [k for (k in o)];
+}
+var keys = getProperties;
+
+// Get all the values of enumerable properties on an object as an array
+function getValues(obj) {
+	return [v for each (v in o)];
+}
+var values = getValues;
+
+// Get an array of [key, value] pairs for all enumerable properties on an object
+function items(obj) {
+	return [[key, value] for each ([key, value] in Iterator(obj))];
 }
 
 // Project an object onto a new object
@@ -582,8 +688,8 @@ function project(template, o, constructor) {
 
 JSLIB.loaded["jslib"] = true;
 
-JSLIB.core = [ "thread", "filesystem", "string", "console", "math", "array", "functional", "json", "xmlhttprequest" ];
-JSLIB.extras = [ "complex", "dialog", "encoding", "encryption", "inflector", "roman" ];
+JSLIB.core = [ "thread", "filesystem", "string", "console", "math", "array", "functional", "json", "date", "iterator" ];
+JSLIB.extras = [ "complex", "dialog", "encoding", "encryption", "inflector", "roman", "logging", "xmlhttprequest", "color" ];
 
 JSLIB.require(JSLIB.core);
 

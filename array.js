@@ -2,6 +2,40 @@
 
 JSLIB.require("math");
 
+Array.isNullOrEmpty = function(a) {
+	return !a || a.length == 0;
+}
+
+Array.isArrayLike = function(o) {
+	return typeOf(o) == 'array' || (o && typeof(o.length) == 'number');
+};
+
+
+// Flatten an array structure
+Array.flatten = function (lst) {
+	function _flattenArray(res, lst) {
+		for (var i = 0; i < lst.length; i++) {
+			var o = lst[i];
+			if (o instanceof Array) {
+				arguments.callee(res, o);
+			} else {
+				res.push(o);
+			}
+		}
+		return res;
+	}
+
+	return _flattenArray([], lst);
+};
+
+Array.prototype.flatten = function() {
+	return Array.flatten(this);
+};
+
+Array.zip = function() {
+	throw new Error("Array.zip not implemented");
+};
+
 Array.prototype.head = function() {
 	return this[0];
 };
@@ -135,6 +169,26 @@ Array.prototype.compareArrays = function(arr) {
 
 Array.compareArrays = function(a, b) {
 	return a.compareArrays(b);
+};
+
+Array.compare = function(a, b, comparer) {
+	var count = a.length;
+	var rval = 0;
+	if (count > b.length) {
+		rval = 1;
+		count = b.length;
+	} else if (count < b.length) {
+		rval = -1;
+	}
+
+	comparer = comparer || compare;
+	for (var i = 0; i < count; i++) {
+		var cmp = comparer(a[i], b[i]);
+		if (cmp) {
+			return cmp;
+		}
+	}
+	return rval;
 };
 
 // Reduce an array from the right
@@ -273,13 +327,22 @@ Array.partition = function(a, fnc) {
 	return a.partition(fnc);
 };
 
-function range(begin, end) {
+function range(begin, end, skip) {
 	if (arguments.length < 2) {
 		end = begin;
 		begin = 0;
 	}
-	for (let i = begin; i < end; ++i) {
+	skip = skip || 1;
+	for (let i = begin; i < end; i += skip) {
 		yield i;
 	}
+}
+
+// Create a function that counts from n (default = 0)
+function counter(n) {
+	n = n || 0;
+	return function() {
+		return n++;
+	};
 }
 

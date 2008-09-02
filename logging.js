@@ -1,3 +1,5 @@
+// Based on MochiKit.Logging
+
 if (typeof Logging == "undefined") Logging = {};
 
 Logging.LogMessage = function (num, level, info) {
@@ -13,7 +15,7 @@ Logging.LogMessage.prototype = {
     },
 };
 
-update(Logging, {
+extend(Logging, {
     logLevelAtLeast: function (minLevel) {
         var self = Logging;
         if (typeof(minLevel) == 'string') {
@@ -137,7 +139,7 @@ Logging.Logger.prototype = {
 
     var Logger = Logging.Logger;
     var baseLog = Logger.prototype.baseLog;
-    update(Logging.Logger.prototype, {
+    extend(Logging.Logger.prototype, {
         debug: Function.partial(baseLog, 'DEBUG'),
         log: Function.partial(baseLog, 'INFO'),
         error: Function.partial(baseLog, 'ERROR'),

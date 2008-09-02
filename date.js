@@ -1,3 +1,5 @@
+// Based on MochiKit Date functions
+
 JSLIB.require("jslib");
 
 Date.isDateLike = function(o) {

@@ -1,4 +1,6 @@
-update(Iterator, {
+// Based on MochiKit.Logging
+
+extend(Iterator, {
 	baseIterator: {
 		__iterator__: function() { return this; },
 		next: function() { throw StopIteration; }

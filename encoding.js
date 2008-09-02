@@ -123,3 +123,76 @@ function lzw_decode(s) {
 	return out.join("");
 }
 
+function urlEncode(unencoded) {
+	return encodeURIComponent(unencoded).replace(/\'/g, '%27');
+}
+
+function queryString(names, values) {
+	if (arguments.length == 1) {
+		if (typeof(names.length) == "number" && names.length == 2) {
+			return arguments.callee(names[0], names[1]);
+		}
+		var o = names;
+		names = [];
+		values = [];
+		for (var k in o) {
+			var v = o[k];
+			if (typeof(v) == "function") {
+				continue;
+			} else if (typeOf(v) == "Array") {
+				for (var i = 0; i < v.length; i++) {
+					names.push(k);
+					values.push(v[i]);
+				}
+			} else {
+				names.push(k);
+				values.push(v);
+			}
+		}
+	}
+	var rval = [];
+	var len = Math.min(names.length, values.length);
+	for (var i = 0; i < len; i++) {
+		v = values[i];
+		if (!isNullOrUndefined(v)) {
+			rval.push(urlEncode(names[i]) + "=" + urlEncode(v));
+		}
+	}
+	return rval.join("&");
+}
+
+function parseQueryString(encodedString, useArrays) {
+	// strip a leading '?' from the encoded string
+	var qstr = (encodedString.charAt(0) == "?")
+		? encodedString.substring(1)
+		: encodedString;
+	var pairs = qstr.replace(/\+/g, "%20").split("&");
+	var o = {};
+
+	if (useArrays) {
+		for (var i = 0; i < pairs.length; i++) {
+			var pair = pairs[i].split("=");
+			var name = decodeURIComponent(pair.shift());
+			if (!name) {
+				continue;
+			}
+			var arr = o[name];
+			if (!(arr instanceof Array)) {
+				arr = [];
+				o[name] = arr;
+			}
+			arr.push(decodeURIComponent(pair.join("=")));
+		}
+	} else {
+		for (i = 0; i < pairs.length; i++) {
+			pair = pairs[i].split("=");
+			var name = pair.shift();
+			if (!name) {
+				continue;
+			}
+			o[decodeURIComponent(name)] = decodeURIComponent(pair.join("="));
+		}
+	}
+	return o;
+}
+

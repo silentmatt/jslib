@@ -1,5 +1,9 @@
 // String Functions
 
+String.isNullOrEmpty = function(s) {
+	return !s || string(s).length == 0;
+}
+
 // Repeat a string <l> times ("asdf".mul(4) == "asdfasdfasdfasdf")
 String.prototype.mul = function(l) {
 	if (l <= 0) return "";
