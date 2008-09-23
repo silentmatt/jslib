@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Komodo Project File - DO NOT EDIT -->
+<project id="2af6d04e-95ff-4884-99c1-0be2a6dbb0e5" kpf_version="4" name="jslib.kpf">
+<preference-set idref="2af6d04e-95ff-4884-99c1-0be2a6dbb0e5">
+  <string id="import_exclude_matches">*.*~;*.bak;*.tmp;CVS;.#*;*.pyo;*.pyc;.svn;*%*;tmp*.html;.DS_Store;.git</string>
+  <string id="import_include_matches"></string>
+  <boolean id="import_live">1</boolean>
+  <boolean id="import_recursive">1</boolean>
+  <string id="import_type">useFolders</string>
+  <string relative="path" id="javascriptExtraPaths"></string>
+  <string id="mappedPaths"></string>
+  <string id="perlExtraPaths"></string>
+  <string id="phpExtraPaths"></string>
+  <string id="pythonExtraPaths"></string>
+  <string id="rubyExtraPaths"></string>
+</preference-set>
+</project>
