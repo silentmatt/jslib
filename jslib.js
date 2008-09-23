@@ -690,7 +690,7 @@ function project(template, o, constructor) {
 JSLIB.loaded["jslib"] = true;
 
 JSLIB.core = [ "thread", "filesystem", "string", "console", "math", "array", "functional", "json", "date", "iterator" ];
-JSLIB.extras = [ "complex", "dialog", "encoding", "encryption", "inflector", "roman", "logging", "xmlhttprequest", "color" ];
+JSLIB.extras = [ "complex", "dialog", "encoding", "encryption", "inflector", "roman", "logging", "xmlhttprequest", "color", "geometry" ];
 
 JSLIB.require(JSLIB.core);
 
