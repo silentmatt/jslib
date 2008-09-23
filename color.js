@@ -47,6 +47,7 @@ Color.rgbToHue = function(r, g, b) {
 	if (b == max) {
 		return 60 * ((r - g) / (max - min)) + 240;
 	}
+	throw new Error("Unexpected error in Color.rgbToHue");
 };
 
 Color.prototype.getHSL = function() {

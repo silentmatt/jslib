@@ -139,7 +139,7 @@ var Geometry2D = {
 		}
 
 		return true;
-	},
+	}
 };
 
 
@@ -147,7 +147,7 @@ var Geometry2D = {
 
 function AffineTransform2D(m00, m10, m01, m11, m02, m12) {
 	var args = null;
-	if (arguments.length = 1) {
+	if (arguments.length == 1) {
 		args = arguments.slice();
 		if (args.length == 2) {
 			args = [args[0][0], args[1][0], args[0][1], args[1][1], args[0][2], args[1][2]];
@@ -178,7 +178,7 @@ extend(AffineTransform2D, {
 
 	scale: function(sx, sy) {
 		return new AffineTransform2D(sx, 0, 0, sy, 0, 0);
-	},
+	}
 });
 
 AffineTransform2D.prototype = {
@@ -203,6 +203,7 @@ AffineTransform2D.prototype = {
 			case 2: return 1;
 			}
 		}
+		return undefined;
 	},
 
 	transform: function(x, y) {
@@ -334,7 +335,7 @@ Point2D.prototype = {
 
 			ctx.fillRect(this.x - 0.5, this.y - 0.5, 1, 1);
 		ctx.restore();
-	},
+	}
 };
 
 
@@ -393,7 +394,7 @@ extend(Line2D, {
 		else {
 			return [0, length];
 		}
-	},
+	}
 });
 
 Line2D.prototype = {
@@ -628,7 +629,7 @@ Line2D.prototype = {
 				ctx.lineTo(this.p1.x, this.p1.y);
 			ctx.stroke();
 		ctx.restore();
-	},
+	}
 };
 
 function LineIntersection(line0, line1) {
@@ -880,6 +881,6 @@ Polygon2D.prototype = {
 		}
 
 		return area;
-	},
+	}
 };
 

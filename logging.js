@@ -12,7 +12,7 @@ Logging.LogMessage = function (num, level, info) {
 Logging.LogMessage.prototype = {
     toString: function () {
         return 'LogMessage(' + [this.num, this.level, this.info].map(methodCaller("toString")).join(', ') + ')';
-    },
+    }
 };
 
 extend(Logging, {
@@ -125,7 +125,7 @@ Logging.Logger.prototype = {
             return lst.join('');
         }
         return '';
-    },
+    }
 };
 
 (function () {

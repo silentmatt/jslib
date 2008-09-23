@@ -95,6 +95,7 @@ var Inflector = {
 				return word.replace(regex, replace_string);
 			}
 		}
+		return word;
 	},
 
 	singularize: function(word) {
@@ -118,6 +119,7 @@ var Inflector = {
 				return word.replace(regex, replace_string);
 			}
 		}
+		return word;
 	},
 
 	add_irregular: function(singular, plural) {

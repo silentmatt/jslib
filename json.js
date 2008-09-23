@@ -148,6 +148,8 @@ JSON = function() {
 			}
 
 			return '{' + a.join(',') + '}';
+		default:
+			return 'null';
 		}
 	}
 

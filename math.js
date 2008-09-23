@@ -1010,7 +1010,7 @@ function pointLineDistance(p, lstart, lend, overLine) {
 }
 
 
-function closestPolyLinePoint(px, py, x0, y0, x1, y1, etc, etc, etc){
+function closestPolyLinePoint(px, py, x0, y0, x1, y1, etc) {
 	var lines = [];
 	var args = normalizeArguments("p*", arguments);
 	var px = args[0].x;

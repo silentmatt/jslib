@@ -19,7 +19,7 @@ String.mul = function(s, l) {
 String.prototype.indent = function(indent, c) {
 	var out = [];
 	var s = this.split('\n');
-	var c = c || " ";
+	c = c || " ";
 	var indentStr = c.mul(indent);
 	for (var i = 0; i < s.length; i++) {
 		out.push(indentStr + s[i]);
@@ -227,7 +227,7 @@ Examples:
 */
 String.prototype.format = (function() {
 	function FormatSpecifier(s) {
-		var s = s.match(/%(\(\w+\)){0,1}([ 0-]){0,1}(\+){0,1}(\d+){0,1}(\.\d+){0,1}(.)/);
+		s = s.match(/%(\(\w+\)){0,1}([ 0-]){0,1}(\+){0,1}(\d+){0,1}(\.\d+){0,1}(.)/);
 		if(s[1]) {
 			this.key = s[1].slice(1,-1);
 		} else {
@@ -425,7 +425,7 @@ String.format = function(s) {
 
 // Pad on the right up to <len> characters with 'c' (default to a space)
 String.prototype.padRight = function(len, c) {
-	var c = c || " ";
+	c = c || " ";
 	return this + c.mul(len - this.length);
 };
 
@@ -435,7 +435,7 @@ String.padRight = function(s, len, c) {
 
 // Pad on the left up to <len> characters with 'c' (default to a space)
 String.prototype.padLeft = function(len, c) {
-	var c = c || " ";
+	c = c || " ";
 	return c.mul(len - this.length) + this;
 };
 

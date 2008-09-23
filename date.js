@@ -130,6 +130,7 @@ Date._padTwo = function (n) {
 };
 
 // TODO: Factor this out
+// FIXME: What about zero length? Shouldn't it be "0000"?
 Date._padFour = function(n) {
 	switch(n.toString().length) {
 		case 1: return "000" + n; break;
@@ -139,6 +140,7 @@ Date._padFour = function(n) {
 		default:
 			return n;
 	}
+	return n;
 };
 
 Date.toPaddedAmericanDate = function (d) {
