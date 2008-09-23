@@ -141,11 +141,14 @@ Writer.prototype = {
 };
 
 // Read a line from a stream (defaults to stdin)
-function readline(stream) {
-	var input = new java.io.BufferedReader(new java.io.InputStreamReader(stream || java.lang.System["in"]));
-	var line = input.readLine();
-	return line !== null ? string(line) : null;
-}
+readline = (function() {
+	var stdin = new java.io.BufferedReader(new java.io.InputStreamReader(java.lang.System["in"]));
+	return function(stream) {
+		var input = stream ? new java.io.BufferedReader(new java.io.InputStreamReader(stream)) : stdin;
+		var line = input.readLine();
+		return line !== null ? string(line) : null;
+	}
+})();
 
 // Check a filename to make sure it exists (it may be a directory)
 function fileExists(filename) {

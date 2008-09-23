@@ -253,7 +253,7 @@
 	function testRoman() {
 		function doTest(limit, type) {
 			print("Testing toRoman(i, '" + type + "')");
-			for (let i = 0; i < limit; i++) {
+			for (var i = 0; i < limit; i++) {
 				try {
 					var r = Number.toRoman(i, type);
 					var n = Number.fromRoman(r, type);

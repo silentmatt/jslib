@@ -1137,4 +1137,3 @@ function random(start, end, rng) {
 
 	return Math.floor(start + (rng() * range));
 }
-
