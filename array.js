@@ -327,6 +327,27 @@ Array.partition = function(a, fnc) {
 	return a.partition(fnc);
 };
 
+Array.prototype.uniq = function(comp) {
+	if (this.length <= 1) return this.slice();
+	comp = comp || function(a, b) { return a === b ? 0 : 1; }
+
+	var last = this[0];
+	var newArray = [last];
+	var len = this.length;
+
+	for (var i = 1; i < len; i++) {
+		if (comp(this[i], last) != 0) {
+			last = this[i];
+			newArray.push(last);
+		}
+	}
+	return newArray;
+};
+
+Array.uniq = function(a, comp) {
+	return Array.prototype.uniq.call(a, comp);
+};
+
 function range(begin, end, skip) {
 	if (arguments.length < 2) {
 		end = begin;
