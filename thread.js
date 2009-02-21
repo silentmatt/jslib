@@ -25,6 +25,7 @@ function sleep(time) {
 
 (function() {
 	var timers = [];
+	var stop = [];
 
 	// Run <fn> after <time> milliseconds
 	this.setTimeout = function(fn, time) {
@@ -37,16 +38,19 @@ function sleep(time) {
 
 	// Run <fn> every <time> milliseconds
 	this.setInterval = function(fn, time) {
-		var num = timers.length;
+		var num = timers.length + 1;
 
-		timers[num] = thread(function() {
-			while (true) {
+		timers[num - 1] = thread(function() {
+			while (!stop[num - 1]) {
 				sleep(time);
 				fn();
 			}
+			timers[num - 1].stop();
+			delete stop[num - 1];
+			delete timers[num - 1];
 		});
 
-		timers[num].start();
+		timers[num - 1].start();
 
 		return num;
 	};
@@ -54,9 +58,8 @@ function sleep(time) {
 	// Prevent a function from being called
 	// <num> is the return value from setTimeout or setInterval
 	this.clearInterval = function(num) {
-		if (timers[num]) {
-			timers[num].stop();
-			delete timers[num];
+		if (timers[num - 1]) {
+			stop[num - 1] = true;
 		}
 	};
 })();

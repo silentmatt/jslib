@@ -330,7 +330,8 @@ Math.exsec = function(fX) {
  *                      <code>iX</code>th term of the Fibonacci sequence
  */
 Math.fibonacci = function(iX) {
-	return Math.round((Math.pow(1 + Math.sqrt(5), iX) - Math.pow(1 - Math.sqrt(5), iX)) / (Math.pow(2, iX) * Math.sqrt(5)));
+	var sqrt5 = Math.sqrt(5);
+	return Math.round((Math.pow(1 + sqrt5, iX) - Math.pow(1 - sqrt5, iX)) / (Math.pow(2, iX) * sqrt5));
 }
 
 
@@ -467,22 +468,22 @@ Number.prototype.isNegative = function() {
  * @return              <code>false</code> if <code>iX</code> is not prime
  */
 Math.isPrime = function(n) {
-    if (n <= 1) { return false; }
-    else if (n < 4) { return true; } //2 and 3 are prime
-    else if (n % 2 === 0) { return false; }
-    else if (n < 9) { return true; }     //we have already excluded 4,6 and 8.
-    else if (n % 3 === 0) { return false; }
-    else {
-        var r = Math.floor(Math.sqrt(n));
-        var f = 5;
-        while (f <= r) {
-            if (((n % f) === 0) || ((n % (f+2)) === 0)) {
-                return false;
-            }
-            f += 6;
-        }
-    }
-    return true;
+	if (n <= 1) { return false; }
+	else if (n < 4) { return true; } //2 and 3 are prime
+	else if (n % 2 === 0) { return false; }
+	else if (n < 9) { return true; }     //we have already excluded 4,6 and 8.
+	else if (n % 3 === 0) { return false; }
+	else {
+		var r = Math.floor(Math.sqrt(n));
+		var f = 5;
+		while (f <= r) {
+			if (((n % f) === 0) || ((n % (f+2)) === 0)) {
+				return false;
+			}
+			f += 6;
+		}
+	}
+	return true;
 }
 
 
@@ -1137,3 +1138,208 @@ function random(start, end, rng) {
 
 	return Math.floor(start + (rng() * range));
 }
+
+
+Math.fact = function(n) {
+	if (n==0 | n==1) { return 1; }
+	if (n<0) { return Math.fact(n+1) / (n+1); }
+	if (n>1) { return n*Math.fact(n-1); }
+	if (n<0.5) {
+		var r = n;
+	}
+	else {
+		var r = 1 - n;
+	}
+	r = 1 / (1 + r*( 0.577215664819072 + r*(-0.655878067489187 + r*(-0.042002698827786 + r*(0.166538990722800 + r*(-0.042197630554869 + r*(-0.009634403818022 + r*(0.007285315490429 + r*(-0.001331461501875 ) ) ) ) ) ) ) ) );
+	if ( n > 0.5 ) {
+		r = n*(1-n)*Math.PI / (r*Sin(Math.PI*n));
+	}
+	return r;
+};
+
+Math.gamma = function(n) {
+	return Math.fact(n-1);
+};
+
+Math.chiSq = function(x, n) {
+    if (x > 1000 || n > 1000) {
+		var q = Math.norm((Math.pow(x / n, 1 / 3) + 2 / (9*n) - 1) / Math.sqrt(2 / (9*n))) / 2;
+		return (x > n) ? q : 1-q;
+	}
+    var p = Math.exp(-0.5 * x);
+	if ((n % 2) == 1) {
+		p = p * Math.sqrt(2*x / Math.PI);
+	}
+    var k = n;
+	while (k >= 2) {
+		p = p*x / k;
+		k = k-2;
+	}
+    var t = p;
+	var a = n;
+	while (t > 1e-15 * p) {
+		a = a + 2;
+		t = t*x / a;
+		p = p + t;
+	}
+    return 1 - p;
+};
+
+Math.norm = function(z) {
+	var q = z*z;
+    if (Math.abs(z) > 7) {
+		return (1 - 1/q + 3/(q*q)) * Math.exp(-q / 2) / (Math.abs(z) * Math.sqrt(Math.PI/2));
+	}
+	else {
+		return Math.chiSq(q, 1);
+	}
+};
+
+Math.gauss = function(z) {
+	return ( (z < 0) ? ( (z<-10) ? 0 : Math.chiSq(z*z, 1) / 2 ) : ( (z > 10) ? 1 : 1 - Math.chiSq(z*z, 1) / 2 ) );
+};
+
+Math.erf = function(z) {
+	return ( (z < 0) ? (2 * Math.gauss(Math.SQRT2 * z) - 1) : (1 - 2 * Math.gauss(-Math.SQRT2 * z)) );
+};
+
+Math.studT = function(t,n) {
+    t = Math.abs(t);
+	var w = t / Math.sqrt(n);
+	var th = Math.atan(w);
+    if (n == 1) {
+		return 1 - th / (Math.PI/2);
+	}
+    var sth = Math.sin(th);
+	var cth = Math.cos(th);
+    if((n % 2) == 1) {
+		return 1 - (th + sth * cth * Math.statCom(cth*cth, 2, n-3, -1)) / (Math.PI/2);
+	}
+	else {
+		return 1 - sth * Math.statCom(cth*cth, 1, n-3, -1);
+	}
+};
+
+Math.fishF = function(f, n1, n2) {
+	var x = n2 / (n1 * f + n2);
+
+    if ((n1 % 2) == 0) {
+		return Math.statCom(1-x, n2, n1 + n2 - 4, n2 - 2) * Math.pow(x, n2/2);
+	}
+    if((n2 % 2) == 0) {
+		return 1 - Math.statCom(x, n1, n1 + n2 - 4, n1 - 2) * Math.pow(1-x, n1/2);
+	}
+    var th = Math.atan(Math.sqrt(n1 * f / n2));
+	var a = th / (Math.PI/2);
+	var sth = Math.sin(th);
+	var cth = Math.cos(th);
+    if (n2 > 1) {
+		a = a + sth * cth * Math.statCom(cth*cth, 2, n2-3, -1) / (Math.PI/2);
+	}
+    if (n1 == 1) {
+		return 1 - a;
+	}
+    var c = 4 * Math.statCom(sth*sth, n2+1, n1 + n2 - 4, n2-2) * sth * Math.pow(cth, n2) / Math.PI;
+    if (n2 == 1) {
+		return 1 - a + c/2;
+	}
+    var k=2;
+	while (k <= (n2-1) / 2) {
+		c = c * k / (k - .5);
+		k = k + 1;
+	}
+    return 1 - a + c;
+};
+
+Math.statCom = function(q,i,j,b) {
+    var zz = 1;
+	var z = zz;
+	var k = i;
+	while (k <= j) {
+		zz = zz * q * k / (k - b);
+		z = z + zz;
+		k = k + 2;
+	}
+    return z;
+};
+
+Math.anorm = function(p) {
+	var v = 0.5;
+	var dv = 0.5;
+	var z = 0;
+    while (dv > 1e-15) {
+		z = 1/v - 1;
+		dv = dv/2;
+		if (Math.norm(z) > p) {
+			v = v - dv;
+		}
+		else {
+			v = v + dv;
+		}
+	}
+    return z;
+};
+
+Math.agauss = function(p) {
+	if (p > 0.5) {
+		return Math.sqrt(Math.achiSq(2 * (1-p),1 ));
+	}
+	else {
+		return -Math.sqrt(Math.achiSq(2 * p, 1));
+	}
+};
+
+Math.aerf = function(p) {
+	return Math.agauss(p/2 + 0.5) / Math.sqrt(2);
+};
+
+Math.achiSq = function(p,n) {
+	var v = 0.5;
+	var dv = 0.5;
+	var x = 0;
+    while (dv > 1e-15) {
+		x = 1/v - 1;
+		dv = dv / 2;
+		if (Math.chiSq(x,n) > p) {
+			v = v - dv;
+		}
+		else {
+			v = v + dv;
+		}
+	}
+    return x;
+};
+
+Math.astudT = function(p,n) {
+	var v = 0.5;
+	var dv = 0.5;
+	var t = 0;
+    while (dv > 1e-15) {
+		t = 1/v - 1;
+		dv = dv / 2;
+		if (Math.studT(t, n) > p) {
+			v = v - dv;
+		}
+		else {
+			v = v + dv;
+		}
+	}
+    return t;
+};
+
+Math.afishF = function(p, n1, n2) {
+	var v = 0.5;
+	var dv = 0.5;
+	var f = 0;
+    while (dv > 1e-15) {
+		f = 1/v - 1;
+		dv = dv / 2;
+		if (Math.fishF(f, n1, n2) > p) {
+			v = v - dv;
+		}
+		else {
+			v = v + dv;
+		}
+	}
+    return f;
+};
