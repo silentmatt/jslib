@@ -2,7 +2,7 @@
 
 String.isNullOrEmpty = function(s) {
 	return !s || string(s).length == 0;
-}
+};
 
 // Repeat a string <l> times ("asdf".mul(4) == "asdfasdfasdfasdf")
 String.prototype.mul = function(l) {
@@ -251,10 +251,11 @@ String.prototype.format = (function() {
 	}
 
 	function pad(s, flag, len) {
+		var c;
 		if (flag == "-") {
-			var c = " ";
+			c = " ";
 		} else {
-			var c = string(flag) || "";
+			c = string(flag) || "";
 		}
 		var rslt = c.mul(len - s.length);
 		if (flag == "-") {
@@ -485,7 +486,7 @@ var naturalCompare = (function() {
 				return 0;
 			}
 		}
-	}
+	};
 })();
 
 // Class to build up a string without constantly creating new strings

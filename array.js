@@ -4,7 +4,7 @@ JSLIB.require("math");
 
 Array.isNullOrEmpty = function(a) {
 	return !a || a.length == 0;
-}
+};
 
 Array.isArrayLike = function(o) {
 	return typeOf(o) == 'array' || (o && typeof(o.length) == 'number');
@@ -88,7 +88,8 @@ Array.prototype.shuffle = function(rng) {
 	while (n > 1) {
 		var k = random(0, n, rng);
 		n--;
-		[this[n], this[k]] = [this[k], this[n]];
+		var a = this; // XXX: [this[n], this[k]] = ... throws assertion error. Bug in rhino?
+		[a[n], a[k]] = [this[k], this[n]];
 	}
 	return this;
 };
@@ -151,7 +152,7 @@ function multiLevelOrder(fields) {
 			}
 		}
 		return 0;
-	}
+	};
 }
 
 // Test two arrays for equality
@@ -329,7 +330,7 @@ Array.partition = function(a, fnc) {
 
 Array.prototype.uniq = function(comp) {
 	if (this.length <= 1) return this.slice();
-	comp = comp || function(a, b) { return a === b ? 0 : 1; }
+	comp = comp || function(a, b) { return a === b ? 0 : 1; };
 
 	var last = this[0];
 	var newArray = [last];
@@ -366,4 +367,3 @@ function counter(n) {
 		return n++;
 	};
 }
-

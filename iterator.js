@@ -164,7 +164,7 @@ extend(Iterator, {
 					throw e;
 				}
 			}
-		};
+		}
 		throw StopIteration;
     },
 

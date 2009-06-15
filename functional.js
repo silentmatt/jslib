@@ -7,7 +7,7 @@ function identity(x) {
 	return x;
 }
 
-operator = {
+var operator = {
 	// unary logic operators
 	truth: function (a) { return !!a; },
 	not: function (a) { return !a; },

@@ -29,7 +29,7 @@ Math.mod = function(val, mod) {
  */
 Math.acosh = function(fX) {
 	return Math.log(fX + Math.sqrt(Math.pow(fX, 2) - 1));
-}
+};
 
 
 /**
@@ -42,7 +42,7 @@ Math.acosh = function(fX) {
  */
 Math.acot = function(fX) {
 	return Math.atan(1 / fX);
-}
+};
 
 
 /**
@@ -58,7 +58,7 @@ Math.acot = function(fX) {
  */
 Math.acoth = function(fX) {
 	return Math.log((fX + 1) / (fX - 1)) / 2;
-}
+};
 
 
 /**
@@ -74,7 +74,7 @@ Math.acoth = function(fX) {
  */
 Math.acsc = function(fX) {
 	return Math.asin(1 / fX);
-}
+};
 
 
 /**
@@ -88,7 +88,7 @@ Math.acsc = function(fX) {
  */
 Math.acsch = function(fX) {
 	return Math.log(Math.sqrt((1 / Math.pow(fX, 2)) + 1) + (1 / fX));
-}
+};
 
 
 /**
@@ -111,7 +111,7 @@ Math.approx = function() {
 	fY = arguments[1];
 	fEpsilon = arguments[2];
 	return Math.abs(fX - fY) < fEpsilon;
-}
+};
 
 
 /**
@@ -125,7 +125,7 @@ Math.approx = function() {
  */
 Math.arg = function(fX, fY) {
 	return Math.atan2(fY, fX) + (Math.PI / 2) * Math.sign(fY) * (1 - Math.sign(fX));
-}
+};
 
 
 /**
@@ -140,7 +140,7 @@ Math.arg = function(fX, fY) {
  */
 Math.asec = function(fX) {
 	return Math.acos(1 / fX);
-}
+};
 
 
 /**
@@ -155,7 +155,7 @@ Math.asec = function(fX) {
  */
 Math.asech = function(fX) {
 	return Math.log(Math.sqrt((1 / Math.pow(fX, 2)) - 1) + (1 / fX));
-}
+};
 
 
 /**
@@ -168,7 +168,7 @@ Math.asech = function(fX) {
  */
 Math.asinh = function(fX) {
 	return Math.log(fX + Math.sqrt(Math.pow(fX, 2) + 1));
-}
+};
 
 
 /**
@@ -183,7 +183,7 @@ Math.asinh = function(fX) {
  */
 Math.atanh = function(fX) {
 	return Math.log((1 + fX) / (1 - fX)) / 2;
-}
+};
 
 
 /**
@@ -196,7 +196,7 @@ Math.atanh = function(fX) {
  */
 Math.cosh = function(fX) {
 	return (Math.exp(fX) + Math.exp(-fX)) / 2;
-}
+};
 
 
 /**
@@ -208,7 +208,7 @@ Math.cosh = function(fX) {
  */
 Math.cot = function(fX) {
 	return 1 / Math.tan(fX);
-}
+};
 
 
 /**
@@ -221,7 +221,7 @@ Math.cot = function(fX) {
  */
 Math.coth = function(fX) {
 	return (Math.exp(fX) + Math.exp(-fX)) / (Math.exp(fX) - Math.exp(-fX));
-}
+};
 
 
 /**
@@ -233,7 +233,7 @@ Math.coth = function(fX) {
  */
 Math.cov = function(fX) {
 	return 1 - Math.sin(fX);
-}
+};
 
 
 /**
@@ -245,7 +245,7 @@ Math.cov = function(fX) {
  */
 Math.csc = function(fX) {
 	return 1 / Math.sin(fX);
-}
+};
 
 
 /**
@@ -258,7 +258,7 @@ Math.csc = function(fX) {
  */
 Math.csch = function(fX) {
 	return 2 / (Math.exp(fX) - Math.exp(-fX));
-}
+};
 
 /**
  * Converts an angle in degrees into its equivalent in gradians.
@@ -270,7 +270,7 @@ Math.csch = function(fX) {
  */
 Math.deg2grad = function(fDegrees) {
 	return (400 / 360) * fDegrees;
-}
+};
 
 
 /**
@@ -282,7 +282,7 @@ Math.deg2grad = function(fDegrees) {
  */
 Math.deg2rad = function(fDegrees) {
 	return ((2 * Math.PI) / 360) * fDegrees;
-}
+};
 
 
 /**
@@ -294,7 +294,7 @@ Math.deg2rad = function(fDegrees) {
  */
 Math.exp10 = function(fX) {
 	return Math.pow(10, fX);
-}
+};
 
 
 /**
@@ -306,7 +306,7 @@ Math.exp10 = function(fX) {
  */
 Math.expm1 = function(fX) {
 	return ((fX > -1.0e-6) && (fX < 1.0e-6)) ? fX + (Math.pow(fX, 2) / 2) : Math.exp(fX) - 1;
-}
+};
 
 
 /**
@@ -318,7 +318,7 @@ Math.expm1 = function(fX) {
  */
 Math.exsec = function(fX) {
 	return (1 / Math.cos(fX)) - 1;
-}
+};
 
 
 /**
@@ -332,7 +332,7 @@ Math.exsec = function(fX) {
 Math.fibonacci = function(iX) {
 	var sqrt5 = Math.sqrt(5);
 	return Math.round((Math.pow(1 + sqrt5, iX) - Math.pow(1 - sqrt5, iX)) / (Math.pow(2, iX) * sqrt5));
-}
+};
 
 
 /**
@@ -348,7 +348,7 @@ Math.fibonacci = function(iX) {
  */
 Math.fmod = function(fDividend, fDivisor) {
 	return fDividend - (Math.floor(fDividend / fDivisor) * fDivisor);
-}
+};
 
 
 /**
@@ -361,7 +361,7 @@ Math.fmod = function(fDividend, fDivisor) {
  */
 Math.gd = function(fX) {
 	return (2 * Math.atan(Math.exp(fX))) - (Math.PI / 2);
-}
+};
 
 
 /**
@@ -373,7 +373,7 @@ Math.gd = function(fX) {
  */
 Math.grad2deg = function(fGradians) {
 	return (360 / 400) * fGradians;
-}
+};
 
 
 /**
@@ -385,7 +385,7 @@ Math.grad2deg = function(fGradians) {
  */
 Math.grad2rad = function(fGradians) {
 	return ((2 * Math.PI) / 400) * fGradians;
-}
+};
 
 
 /**
@@ -397,7 +397,7 @@ Math.grad2rad = function(fGradians) {
  */
 Math.hav = function(fX) {
 	return (1 - Math.cos(fX)) / 2;
-}
+};
 
 
 /**
@@ -412,7 +412,7 @@ Math.hav = function(fX) {
  */
 Math.hypot = function(fLengthA, fLengthB) {
 	return Math.sqrt(Math.pow(fLengthA, 2) + Math.pow(fLengthB, 2));
-}
+};
 
 
 /**
@@ -441,7 +441,7 @@ Number.prototype.isEven = function() {
  */
 Math.isOdd = function(fX) {
 	return (fX % 2) != 0;
-}
+};
 Number.prototype.isOdd = function() {
 	return Math.isOdd(this);
 };
@@ -484,7 +484,7 @@ Math.isPrime = function(n) {
 		}
 	}
 	return true;
-}
+};
 
 
 
@@ -498,7 +498,7 @@ Math.isPrime = function(n) {
  */
 Math.log10 = function(fX) {
 	return Math.LOG10E * Math.log(fX);
-}
+};
 
 
 /**
@@ -511,7 +511,7 @@ Math.log10 = function(fX) {
  */
 Math.log2 = function(fX) {
 	return Math.LOG2E * Math.log(fX);
-}
+};
 
 
 /**
@@ -524,7 +524,7 @@ Math.log2 = function(fX) {
  */
 Math.log1p = function(fX) {
 	return ((fX > -1.0e-8) && (fX < 1.0e-8)) ? fX - (Math.pow(fX, 2) / 2) : Math.log(1 + fX);
-}
+};
 
 
 /**
@@ -558,7 +558,7 @@ Math.luhn = function(lX) {
 	}
 
 	return (iSum % 10) == 0;
-}
+};
 
 
 /**
@@ -570,7 +570,7 @@ Math.luhn = function(lX) {
  */
 Math.rad2deg = function(fRadians) {
 	return (360 / (2 * Math.PI)) * fRadians;
-}
+};
 
 
 /**
@@ -582,7 +582,7 @@ Math.rad2deg = function(fRadians) {
  */
 Math.rad2grad = function(fRadians) {
 	return (400 / (2 * Math.PI)) * fRadians;
-}
+};
 
 
 /**
@@ -594,7 +594,7 @@ Math.rad2grad = function(fRadians) {
  */
 Math.sec = function(fX) {
 	return 1 / Math.cos(fX);
-}
+};
 
 
 /**
@@ -607,7 +607,7 @@ Math.sec = function(fX) {
  */
 Math.sech = function(fX) {
 	return  2 / (Math.exp(fX) + Math.exp(-fX));
-}
+};
 
 
 /**
@@ -620,7 +620,7 @@ Math.sech = function(fX) {
  */
 Math.sigmoid = function(fX) {
 	return 1 / (1 + Math.exp(-fX));
-}
+};
 
 
 /**
@@ -634,7 +634,7 @@ Math.sigmoid = function(fX) {
  */
 Math.sign = function(fX) {
 	return (fX == 0) ? 0 : fX / Math.abs(fX);
-}
+};
 
 
 /**
@@ -651,7 +651,7 @@ Math.indicator = function(fX) {
 		return NaN;
 	}
 	return (fX >= 0.0) ? 1.0 : -1.0;
-}
+};
 
 
 /**
@@ -664,7 +664,7 @@ Math.indicator = function(fX) {
  */
 Math.sinc = function(fX) {
 	return (fX == 0) ? 1 : Math.sin(fX) / fX;
-}
+};
 
 
 /**
@@ -677,7 +677,7 @@ Math.sinc = function(fX) {
  */
 Math.sinh = function(fX) {
 	return (Math.exp(fX) - Math.exp(-fX)) / 2;
-}
+};
 
 
 /**
@@ -689,7 +689,7 @@ Math.sinh = function(fX) {
  */
 Math.sq = function(fX) {
 	return Math.pow(fX, 2);
-}
+};
 
 
 /**
@@ -702,7 +702,7 @@ Math.sq = function(fX) {
  */
 Math.tanc = function(fX) {
 	return (fX == 0) ? 1 : Math.tan(fX) / fX;
-}
+};
 
 
 /**
@@ -715,7 +715,7 @@ Math.tanc = function(fX) {
  */
 Math.tanh = function(fX) {
 	return (Math.exp(fX) - Math.exp(-fX)) / (Math.exp(fX) + Math.exp(-fX));
-}
+};
 
 
 /**
@@ -727,7 +727,7 @@ Math.tanh = function(fX) {
  */
 Math.vers = function(fX) {
 	return 1 - Math.cos(fX);
-}
+};
 
 
 
@@ -848,7 +848,7 @@ function normalizeArguments(format, args) {
 // Get the {x, y} coordinates of the point on the circle that is closest to the specified point
 // If allowInside is true, when the point can be anywhere inside the circle
 // Point arguments can be passed as individual x and y parameters, [x,y] arrays, or {x, y} objects
-function closestCirclePoint(point, center, radius, allowInside) {
+function closestCirclePoint(/* point, center, radius, allowInside */) {
 	var points = normalizeArguments("ppnb", arguments);
 	var px = points[0].x;
 	var py = points[0].y;
@@ -876,26 +876,32 @@ function closestCirclePoint(point, center, radius, allowInside) {
 }
 
 
-function lineVerticalIntercept(px, lpt, angle) {
+function lineVerticalIntercept(/* px, lpt, angle */) {
 	var points = normalizeArguments("xpn", arguments);
 	var px = points[0];
 	var x = points[1].x;
 	var y = points[1].y;
 	var angle = points[2];
 
-	var tg = ((angle = Math.fmod(angle, 2 * Math.PI)) < 0 && (angle += Math.PI), Math.tan(-angle));
+	if ((angle = Math.fmod(angle, 2 * Math.PI)) < 0) {
+		angle += Math.PI;
+	}
+	var tg = Math.tan(-angle);
 	return {x: px, y: (px - x) * tg + y};
 }
 
 
-function lineHorizontalIntercept(py, lpt, angle) {
+function lineHorizontalIntercept(/* py, lpt, angle */) {
 	var points = normalizeArguments("ypn", arguments);
 	var py = points[0];
 	var x = points[1].x;
 	var y = points[1].y;
 	var angle = points[2];
 
-	var tg = ((angle = Math.fmod(angle, 2 * Math.PI)) < 0 && (angle += Math.PI), Math.tan(-angle));
+	if ((angle = Math.fmod(angle, 2 * Math.PI)) < 0) {
+		angle += Math.PI;
+	}
+	var tg = Math.tan(-angle);
 	return {x: (py - y) / tg + x, y: py};
 }
 
@@ -931,7 +937,7 @@ function pointLineIntersection(pt, lstart, lend) {
 
 
 // Calculate a bezier curve
-function Bezier(p0, p1, c0, c1) {
+function Bezier(/* p0, p1, c0, c1 */) {
 	var o = this;
 	var points = normalizeArguments("pppp", arguments);
 	var p0 = points[0];
@@ -967,7 +973,9 @@ with({$: Bezier, o: Bezier.prototype}) {
 		y = (y = this.y0 - this.y1) * y,
 		l = Math.max(40, Math.ceil(Math.sqrt(x + y))),
 		i = l + 1;
-		while(c(this.getCoordinates(r = --i / l), r), i);
+		while (c(this.getCoordinates(r = --i / l), r), i) {
+			// do nothing
+		}
 	};
 }
 
@@ -980,7 +988,7 @@ function lineLength(p1, p2) {
 	return Math.sqrt(dx*dx + dy*dy);
 }
 
-distance = lineLength;
+var distance = lineLength;
 
 // Distance from a point to a line or segment.
 // overLine specifies if the distance should respect the limits of the segment (overLine == true) or if it should consider the segment
@@ -1011,7 +1019,7 @@ function pointLineDistance(p, lstart, lend, overLine) {
 }
 
 
-function closestPolyLinePoint(px, py, x0, y0, x1, y1, etc) {
+function closestPolyLinePoint(/* px, py, x0, y0, x1, y1, etc */) {
 	var lines = [];
 	var args = normalizeArguments("p*", arguments);
 	var px = args[0].x;
@@ -1042,13 +1050,27 @@ function closestPolyLinePoint(px, py, x0, y0, x1, y1, etc) {
 		o = lines[i],
 		lower = {i: i, l: pointLineDistance(px, py, o.x0, o.y0, o.x1, o.y1, 1)};
 	while (i--) {
-		lower.l > (l = pointLineDistance(px, py, (o = lines[i]).x0, o.y0, o.x1, o.y1, 1)) && (lower = {i: i, l: l});
+		if (lower.l > (l = pointLineDistance(px, py, (o = lines[i]).x0, o.y0, o.x1, o.y1, 1))) {
+			lower = {i: i, l: l};
+		}
 	}
 
-	py < Math.min((o = lines[lower.i]).y0, o.y1) ? py = Math.min(o.y0, o.y1)
-		: py > Math.max(o.y0, o.y1) && (py = Math.max(o.y0, o.y1));
-	px < Math.min(o.x0, o.x1) ? px = Math.min(o.x0, o.x1)
-		: px > Math.max(o.x0, o.x1) && (px = Math.max(o.x0, o.x1));
+	if (py < Math.min((o = lines[lower.i]).y0, o.y1)) {
+		py = Math.min(o.y0, o.y1);
+	}
+	else {
+		if (py > Math.max(o.y0, o.y1)) {
+			py = Math.max(o.y0, o.y1);
+		}
+	}
+	if (px < Math.min(o.x0, o.x1)) {
+		px = Math.min(o.x0, o.x1);
+	}
+	else {
+		if (px > Math.max(o.x0, o.x1)) {
+			px = Math.max(o.x0, o.x1);
+		}
+	}
 	Math.abs(o.x0 - o.x1) < Math.abs(o.y0 - o.y1) ?
 		px = (py * (o.x0 - o.x1) - o.x0 * o.y1 + o.y0 * o.x1) / (o.y0 - o.y1)
 		: py = (px * (o.y0 - o.y1) - o.y0 * o.x1 + o.x0 * o.y1) / (o.x0 - o.x1);
@@ -1077,9 +1099,10 @@ function isPointInPoly(pt, poly) {
 	poly = normalizeArguments("p*", args[1]);
 
 	for(var c = false, i = -1, l = poly.length, j = l - 1; ++i < l; j = i)
-		((poly[i].y <= pt.y && pt.y < poly[j].y) || (poly[j].y <= pt.y && pt.y < poly[i].y))
-		&& (pt.x < (poly[j].x - poly[i].x) * (pt.y - poly[i].y) / (poly[j].y - poly[i].y) + poly[i].x)
-		&& (c = !c);
+		if (((poly[i].y <= pt.y && pt.y < poly[j].y) || (poly[j].y <= pt.y && pt.y < poly[i].y)) &&
+		    (pt.x < (poly[j].x - poly[i].x) * (pt.y - poly[i].y) / (poly[j].y - poly[i].y) + poly[i].x)) {
+			c = !c;
+		}
 	return c;
 }
 
@@ -1088,26 +1111,35 @@ function isPointInPoly(pt, poly) {
 Math.gcd = function(o) {
 	if(!o.length)
 		return 0;
-	for(var r, a, i = o.length - 1, b = o[i]; i;)
-		for(a = o[--i]; r = a % b; a = b, b = r);
+	for(var r, a, i = o.length - 1, b = o[i]; i;) {
+		for(a = o[--i]; r = a % b; a = b, b = r) {
+			// do nothing
+		}
+	}
 	return b;
-}
+};
 
 
 // least common multiple of the numbers in the array
 Math.lcm = function(o) {
-	for(var i, j, n, d, r = 1; (n = o.pop()) != undefined;)
+	for(var i, j, n, d, r = 1; (n = o.pop()) != undefined;) {
 		while(n > 1){
 			if(n % 2){
-				for (i = 3, j = Math.floor(Math.sqrt(n)); i <= j && n % i; i += 2);
+				for (i = 3, j = Math.floor(Math.sqrt(n)); i <= j && n % i; i += 2) {
+					// do nothing
+				}
 				d = i <= j ? i : n;
 			}
-			else
+			else {
 				d = 2;
-			for(n /= d, r *= d, i = o.length; i; !(o[--i] % d) && (o[i] /= d) == 1 && o.splice(i, 1));
+			}
+			for(n /= d, r *= d, i = o.length; i; !(o[--i] % d) && (o[i] /= d) == 1 && o.splice(i, 1)) {
+				// do nothing
+			}
 		}
+	}
 	return r;
-}
+};
 
 
 // Expands a number in exponential form to decimal form.
@@ -1118,9 +1150,10 @@ String.prototype.expandExponential = function() {
 	var s = this.replace(/\s*[*xX]\s*10\s*(\^|\*\*)\s*/, "e");
 
 	return s.replace(/^([+-])?(\d+).?(\d*)[eE]([-+]?\d+)$/, function(x, s, n, f, c) {
-		var l = +c < 0, i = n.length + +c, x = (l ? n : f).length,
-		c = ((c = Math.abs(c)) >= x ? c - x + l : 0),
-		z = (new Array(c + 1)).join("0"), r = n + f;
+		var l = +c < 0, i = n.length + +c;
+		x = (l ? n : f).length;
+		c = ((c = Math.abs(c)) >= x ? c - x + l : 0);
+		var z = (new Array(c + 1)).join("0"), r = n + f;
 		return (s || "") + (l ? r = z + r : r += z).substr(0, i += l ? z.length : 0) + (i < r.length ? "." + r.substr(i) : "");
 	});
 };
@@ -1141,14 +1174,15 @@ function random(start, end, rng) {
 
 
 Math.fact = function(n) {
+	var r;
 	if (n==0 | n==1) { return 1; }
 	if (n<0) { return Math.fact(n+1) / (n+1); }
 	if (n>1) { return n*Math.fact(n-1); }
 	if (n<0.5) {
-		var r = n;
+		r = n;
 	}
 	else {
-		var r = 1 - n;
+		r = 1 - n;
 	}
 	r = 1 / (1 + r*( 0.577215664819072 + r*(-0.655878067489187 + r*(-0.042002698827786 + r*(0.166538990722800 + r*(-0.042197630554869 + r*(-0.009634403818022 + r*(0.007285315490429 + r*(-0.001331461501875 ) ) ) ) ) ) ) ) );
 	if ( n > 0.5 ) {

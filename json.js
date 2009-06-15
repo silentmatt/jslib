@@ -53,7 +53,10 @@
 				return key.indexOf('date') >= 0 ? new Date(value) : value;
 			});
 */
-JSON = function() {
+
+if (typeof JSON === "undefined") {
+
+getGlobal().JSON = function() {
 
 	function f(n) {	// Format integers to have at least two digits.
 		return n < 10 ? '0' + n : n;
@@ -154,7 +157,7 @@ JSON = function() {
 	}
 
 	return {
-		encode: stringify,
+		stringify: stringify,
 		parse: function (text, filter) {
 			var j;
 
@@ -187,7 +190,7 @@ JSON = function() {
 	};
 }();
 
-json_encode = JSON.encode;
-json_decode = JSON.parse;
-delete JSON;
+}
 
+var json_encode = JSON.stringify;
+var json_decode = JSON.parse;

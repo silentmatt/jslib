@@ -1,6 +1,7 @@
 // General Utilities
+"use strict";
 
-JSLIB = { version: "0.1a" };
+var JSLIB = { version: "0.1a" };
 JSLIB.loaded = {};
 JSLIB.require = function() {
 	var args = getVarArgs(arguments);
@@ -34,7 +35,7 @@ JSLIB.require = function() {
 		this.strB = strB; // can be a null pointer
 		this.numC = numC;
 		this.extraD = extraD;
-	};
+	}
 
 	function strtol(s) {
 		return [parseInt(s), s.replace(/^[-+]?[0-9]+/, '')];
@@ -147,7 +148,7 @@ JSLIB.require = function() {
 		} while (a || b);
 
 		return result;
-	}
+	};
 })();
 
 // Convert a value to a *JavaScript* string (including Java strings)
@@ -164,7 +165,7 @@ var isString = (function() {
 
 	return function(s) {
 		return !!(typeof s === "string" || s instanceof String || (s.getClass && s.getClass() === javaStringClass));
-	}
+	};
 })();
 
 // Create an object, env, containing the system environment as properties
@@ -246,7 +247,7 @@ function getVarArgs(args, start) {
 // The file is searched for in the current directory, $HOME/lib/, $HOME/lib/js, the directories in java.library.path, and directories in $JSLIB_PATH
 // If $HOME is not set, "/usr/" will be substituted
 // A global variable, __FILE__ will be defined with the absolute path to the file
-include = (function() {
+var include = (function() {
 	var globalContext = this;
 	var moduleSearchPath = [];
 
@@ -309,7 +310,7 @@ include = (function() {
 
 	var pathSep = "" + environment["path.separator"] || ":";
 	includeFunction.addPaths(("" + environment["java.library.path"] || "").split(pathSep));
-	includeFunction.addPaths((env.JSLIB_PATH || "").split(pathSep));
+	includeFunction.addPaths(("JSLIB_PATH" in env ? env.JSLIB_PATH : "").split(pathSep));
 
 	function doImport(name) {
 		function ImportFailed(moduleName, ex) {
@@ -349,7 +350,7 @@ include = (function() {
 			}
 
 			try {
-				var old__FILE__ = globalContext.__FILE__;
+				var old__FILE__ = "__FILE__" in globalContext ? globalContext.__FILE__ : undefined;
 				globalContext.__FILE__ = absPath(name);
 				load(name);
 			}
@@ -374,17 +375,17 @@ include = (function() {
 		else {
 			var fileName = "/" + name;
 
-			try {
-				for(i = 0; i < moduleSearchPath.length; i++) {
+			//try {
+				for(var i = 0; i < moduleSearchPath.length; i++) {
 					var path = moduleSearchPath[i] + fileName;
 					if (loadFile(path)) {
 						return;
 					}
 				}
-			}
-			catch (ex) {
-				throw new ImportFailed(name, ex);
-			}
+			//}
+			//catch (ex) {
+			//	throw new ImportFailed(name, ex);
+			//}
 
 			throw new ImportFailed(name, "File not found");
 		}
